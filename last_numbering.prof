@@ -1,0 +1,21 @@
+#!/bin/bash
+
+################################
+# export
+################################
+export TEST1=$(date +%Y-%m-%d;pwd)
+export TEST2=0001
+export TEST3=096
+
+################################
+# _STPNO
+################################
+export LAST_STPNO_FILE="/mnt/d/sh/Numbering_test/last_stpNo.txt"
+
+export DATE=$(date +%Y%m%d)
+export LAST_DATE=$(cat ${LAST_STPNO_FILE} | awk -F '[-]' '{print $1}')
+export LAST_NO=$(cat ${LAST_STPNO_FILE} | awk -F '[-]' '{print $2}')
+
+if [[ ${LAST_DATE} == ${DATE} ]]; then
+  export NO_AFT=$(echo ${LAST_NO} | awk '{printf "%06d\n",$1+1}')
+fi
